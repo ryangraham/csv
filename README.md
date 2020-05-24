@@ -27,26 +27,26 @@ brew install csv
   std::fstream ifs(input_file_name);
 
   if (!ifs) return 1;
+
   auto reader = csv::map_reader(ifs);
 
-  auto headers = reader.field_names | views::join(',') | to<std::string>();
-  std::cout << headers << std::endl;
+  std::cout << reader.field_names.front() << std::endl;
+  std::cout << std::string(10, '-') << std::endl;
 
-  auto rows = reader.rows() | actions::sort | actions::unique;
-  for (auto& row : rows) {
-    auto row_str = row | views::values | views::join(',') | to<std::string>();
-    std::cout << row_str << std::endl;
+  for (auto& row : reader.rows()) {
+    std::cout << row["FirstName"] << std::endl;
   }
 ```
 
 Will output something like...
 
 ```
-FirstName,LastName
-Barney,Rubble
-Betty,Rubble
-Fred,Flintstone
-Pebbles,Flintstone
+FirstName
+----------
+Fred
+Pebbles
+Barney
+Betty
 ```
 
 ## Examples
