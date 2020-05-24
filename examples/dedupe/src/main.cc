@@ -1,11 +1,11 @@
+#include <csv/csv.h>
+
 #include <fstream>
 #include <iostream>
 #include <string>
 
-#include "csv.h"
-
 int main() {
-  std::string file_name = "country.csv";
+  std::string file_name = "../country.csv";
   std::fstream ifs(file_name);
 
   if (!ifs) return 1;

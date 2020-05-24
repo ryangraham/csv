@@ -3,9 +3,11 @@ all:
 	@echo "clean - remove built files"
 
 run: clean build
+	cd build && $(MAKE) run
 
+.PHONY: build
 build:
-	mkdir build && cd build && cmake .. && $(MAKE) && $(MAKE) run
+	cd build && cmake .. && $(MAKE)
 
 clean:
-	rm -rf ./build || true
+	rm -rf ./build/* || true
