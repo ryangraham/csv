@@ -9,6 +9,7 @@ A C++ header-only CSV parser with an interface inspired by Python's DictReader/D
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Examples](#examples)
 
 ## Installation
 
