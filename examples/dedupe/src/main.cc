@@ -5,17 +5,23 @@
 #include <string>
 
 int main() {
-  std::string file_name = "../country.csv";
-  std::fstream ifs(file_name);
+  std::string input_file_name = "../input.csv";
+  std::fstream ifs(input_file_name);
 
   if (!ifs) return 1;
 
   auto reader = csv::map_reader(ifs);
 
-  // auto print_map = [](auto&& map) {
-  //   for (const auto& [k, v] : map) std::cout << k << "=" << v << std::endl;
-  // };
-  // for (auto&& row : reader.rows()) print_map(row);
+  std::vector<std::string> field_names = reader.field_names;
+  std::string output_file_name = "../output.csv";
+  std::ofstream ofs(output_file_name);
+  if (!ofs) return 1;
 
+  auto writer = csv::map_writer(ofs, field_names);
+  writer.write_header();
+
+  for (auto&& row : reader.rows()) writer.write_row(row);
+
+  ofs.close();
   return 0;
 }
