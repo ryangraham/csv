@@ -20,7 +20,9 @@ int main() {
   auto writer = csv::map_writer(ofs, field_names);
   writer.write_header();
 
-  for (auto&& row : reader.rows()) writer.write_row(row);
+  auto rows = reader.rows() | actions::sort | actions::unique;
+
+  for (auto&& row : rows) writer.write_row(row);
 
   ofs.close();
   return 0;
