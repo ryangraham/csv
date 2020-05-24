@@ -2,3 +2,4 @@ a.out
 .vscode/
 build/*
 examples/dedupe/build/
+examples/print/build/
