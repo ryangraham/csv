@@ -42,10 +42,6 @@ struct map_reader {
       results.push_back(row);
     }
 
-    // for (auto&& l : lines)
-    //   for (auto&& x : l) std::cout << x.value << " " << x.type_str <<
-    //   std::endl;
-
     return results;
   }
 };
