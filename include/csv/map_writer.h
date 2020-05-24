@@ -21,7 +21,7 @@ struct map_writer {
       : sout_(&sout), field_names_{field_names} {}
 
   void write_header() {
-    auto header = field_names_ | view::join(',') | to<std::string>();
+    auto header = field_names_ | views::join(',') | to<std::string>();
     *sout_ << header << std::endl;
     std::flush(*sout_);
   }
