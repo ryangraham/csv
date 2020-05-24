@@ -16,8 +16,7 @@ int main() {
   std::ofstream ofs(output_file_name);
   if (!ofs) return 1;
 
-  std::vector<std::string> field_names = reader.field_names;
-  auto writer = csv::map_writer(ofs, field_names);
+  auto writer = csv::map_writer(ofs, reader.field_names);
   writer.write_header();
 
   auto rows = reader.rows() | actions::sort | actions::unique;
