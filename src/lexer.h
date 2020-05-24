@@ -63,7 +63,11 @@ struct lexer {
   char get() { return *begin++; }
 
   token next() {
-    switch (peek()) {
+    char c = peek();
+
+    if (c == '"') quote_count++;
+
+    switch (c) {
       case '\0':
         return atom(token_type::END);
       case ',':
@@ -82,20 +86,19 @@ struct lexer {
   }
 
   bool is_identifier(char c) {
+    if (c == '"') quote_count++;
+
     switch (c) {
       case '\0':
         return false;
       case ',':
         return (inside_quote_context()) ? true : false;
-      case '"':
-        quote_count++;
-        return true;
       default:
         return true;
     }
   }
 
-  bool inside_quote_context() { return quote_count % 2 == 0; }
+  bool inside_quote_context() { return quote_count % 2 == 1; }
   int quote_count = 0;
   const char* begin = nullptr;
 };
