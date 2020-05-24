@@ -1,8 +1,6 @@
 #include <fstream>
 #include <iostream>
-#include <range/v3/all.hpp>
 #include <string>
-#include <vector>
 
 #include "csv.h"
 
