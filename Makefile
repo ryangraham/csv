@@ -12,3 +12,9 @@ build:
 
 clean:
 	rm -rf ./build/* || true
+
+docker:
+	docker build -t ryangraham/csv:0.0.1 .
+
+push:
+	docker push ryangraham/csv:0.0.1
