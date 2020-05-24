@@ -12,11 +12,11 @@ int main() {
 
   auto reader = csv::map_reader(ifs);
 
-  std::vector<std::string> field_names = reader.field_names;
   std::string output_file_name = "../output.csv";
   std::ofstream ofs(output_file_name);
   if (!ofs) return 1;
 
+  std::vector<std::string> field_names = reader.field_names;
   auto writer = csv::map_writer(ofs, field_names);
   writer.write_header();
 
