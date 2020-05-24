@@ -4,8 +4,6 @@
 
 #include "csv.h"
 
-using namespace ranges;
-
 int main() {
   std::string file_name = "country.csv";
   std::fstream ifs(file_name);
