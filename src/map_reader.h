@@ -4,17 +4,15 @@
 #include <istream>
 #include <map>
 #include <range/v3/all.hpp>
-#include <range/v3/view/facade.hpp>
 #include <string>
 #include <vector>
 
 #include "lexer.h"
+#include "parser.h"
 
 using namespace ranges;
 
 namespace csv {
-
-typedef std::map<std::string, std::string> row;
 
 struct map_reader {
  private:
@@ -32,16 +30,22 @@ struct map_reader {
   map_reader(std::istream& sin) : sin_(&sin) { get_field_names(); }
 
   std::vector<row> rows() {
+    std::vector<row> results;
     auto lex = [](const std::string& s) {
       lexer lexer(s);
       return lexer.tokens();
     };
     auto lines = getlines(*sin_) | views::transform(lex);
 
-    for (auto&& l : lines)
-      for (auto&& x : l) std::cout << x.value << " " << x.type_str << std::endl;
+    for (auto&& line : lines) {
+      auto row = parse(line, field_names);
+      results.push_back(row);
+    }
 
-    std::vector<row> results;
+    // for (auto&& l : lines)
+    //   for (auto&& x : l) std::cout << x.value << " " << x.type_str <<
+    //   std::endl;
+
     return results;
   }
 };

@@ -31,6 +31,8 @@ struct token {
     type_str = token_type_name(type);
   }
 
+  bool is_identifier() { return type == token_type::IDENTIFIER; }
+
   token_type type{};
   std::string_view type_str{};
   std::string_view value{};
